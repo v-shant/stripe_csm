@@ -1,4 +1,4 @@
-export const mui = (element, client) => {
+const mui = (element, client) => {
   if (client === 'mattermost') {
     const output = [];
     switch (element.type) {
@@ -35,3 +35,5 @@ export const mui = (element, client) => {
   }
   return element;
 };
+
+module.exports.mui = mui;

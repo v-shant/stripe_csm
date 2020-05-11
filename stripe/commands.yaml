@@ -1,0 +1,6 @@
+commands:
+  stripe:
+    description: Stripe Commands
+    parameters:
+      - name: "name"
+      - name: "..."

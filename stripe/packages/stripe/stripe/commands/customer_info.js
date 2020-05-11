@@ -1,7 +1,8 @@
 
 const { mui } = require('./utils');
-async function customer_list(clinet, stripeSK, args) {
-  if (!(args && typeof args === 'object' && args[0])) {
+async function customer_info(client, stripeSK, args) {  
+  const customerID = args && args.split(" ")[0];
+  if (!customerID) {
     return {
       attachments: [
         {
@@ -12,34 +13,33 @@ async function customer_list(clinet, stripeSK, args) {
     };
   }
   const stripe = require("stripe")(stripeSK);
-  const customer = await stripe.customers.retrieve(args[0]);
+  const customer = await stripe.customers.retrieve(customerID);
   if (customer) {
     const blocks = [];
-    blocks.push(mui({
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": `*Customer:* \`${customer.id}\``
-      }
-    }, clinet));
     const fields = [];
+    fields.push({
+      "type": "mrkdwn",
+      "text": `*Customer:* ${customer.id}`
+    });
     customer.name && fields.push({
       "type": "mrkdwn",
-      "text": `*Name:*\n${customer.name}`
+      "text": `*Name:* ${customer.name}`
     });
     customer.subscriptions && fields.push({
       "type": "mrkdwn",
-      "text": `*Subscription:*\n${customer.subscriptions.data && customer.subscriptions.data.length > 0 ? 'Active' : 'Inactive'}`
+      "text": `*Subscription:* ${customer.subscriptions.data && customer.subscriptions.data.length > 0 ? 'Active' : 'Inactive'}`
     });
     fields.push({
       "type": "mrkdwn",
-      "text": `*Balance:*\n${customer.balance}`
+      "text": `*Balance:* ${customer.balance}`
     });
     blocks.push(mui({
       type: 'section',
       fields
     }, client));
-    return blocks;
+    return {
+      blocks
+    };
   } else {
     return [{
       "type": "context",
@@ -50,4 +50,4 @@ async function customer_list(clinet, stripeSK, args) {
     }];
   }
 }
-module.exports.customer_list = customer_list;
+module.exports.customer_info = customer_info;

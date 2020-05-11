@@ -1,6 +1,0 @@
-commands:
-    stripe:
-      description: Run stripe functions.
-      parameters:
-        - name: substr
-        - ...

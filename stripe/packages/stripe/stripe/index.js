@@ -9,7 +9,8 @@ async function _command(params, commandText, secrets = {}) {
     };
   }
   const commands = {
-    'customer_list': require('./commands/customer_list')
+    'customer_list': require('./commands/customer_list').customer_list,    
+    'customer_info': require('./commands/customer_info').customer_info
   };
   const {
     name,
