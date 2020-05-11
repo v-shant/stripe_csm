@@ -1,0 +1,15 @@
+{
+    "name": "stripe",
+    "version": "1.0.0",
+    "description": "Stripe methods",
+    "license": "Apache",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/v-shant/stripe_csm.git"
+      
+    },
+    "main": "index.js",
+    "dependencies": {
+        "stripe": "^7.14.0"
+    }
+  }
