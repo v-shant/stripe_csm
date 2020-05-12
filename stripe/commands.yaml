@@ -1,6 +1,7 @@
 commands:
   stripe:
     description: Stripe Commands
+    sourcePath: packages/stripe/stripe/index.js
     parameters:
       - name: "name"
       - name: "..."
